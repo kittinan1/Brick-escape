@@ -13,11 +13,11 @@
         //SingleEngineFile:'',
 		
         appFiles:[
-            'src/GameLayer.js'  ,   //add your own files in order here
+            'src/GameLayer.js'  ,   
             'src/Brick.js'	,
 			'src/Circle.js',
 			'src/Wallpaper.js'	,
-			
+			'src/Gameover.js' ,
 			
         ]
     };

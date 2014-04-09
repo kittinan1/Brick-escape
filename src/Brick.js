@@ -1,5 +1,5 @@
 var Brick = cc.Sprite.extend({
-    ctor: function() {
+    ctor: function(gameLayer) {
         this._super();
         this.initWithFile( 'Image/Brick.png' );
         this.direction = Brick.DIR.STILL;
@@ -7,9 +7,20 @@ var Brick = cc.Sprite.extend({
 		this.isRight = false;
 		this.isLeft = false;
 		this.isDown = false;
+		this.gameLayer = gameLayer;
     },
+	
+	closeTo: function( obj ) {
+		var myPos = this.getPosition();
+		var oPos = obj.getPosition();
+		return ( ( Math.abs( myPos.x - oPos.x ) <= 50 ) &&
+		 ( Math.abs( myPos.y - oPos.y ) <= 50 ) );
+	
+    },
+	
     update: function( dt ) {	
 	var pos = this.getPosition();
+	if(!this.gameLayer.isOver){
 	if (this.isUp ){
 		if ( pos.y < screenHeight-35  ) {
         	this.setPosition( new cc.Point( pos.x, pos.y + 10 ) );
@@ -38,26 +49,27 @@ var Brick = cc.Sprite.extend({
 			this.setPosition( new cc.Point( pos.x, pos.y ) );
 		}
 	}	
+	}
 	},
 	
 		
     switchDirection: function(direction) {
 	if ( direction == 1 ) {
 		this.isUp = true;
-        this.setRotation( 0 );
+        //this.setRotation( 0 );
 	}
 	else if( direction == 2 ){
 		this.isRight = true;
-        this.setRotation( 90 );
+        //this.setRotation( 90 );
 	}
 	else if( direction == 4 ){
 		this.isDown = true;
-		this.setRotation( 180 );
+		//this.setRotation( 180 );
     }
 	else if( direction == 3 ){
 		this.isLeft = true;
-		this.setRotation( 270 );
-}
+		//this.setRotation( 270 );
+	}
 
 	},
 	
