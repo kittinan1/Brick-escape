@@ -28,7 +28,7 @@ var GameLayer = cc.LayerColor.extend({
         this.setKeyboardEnabled( true );
 		this.scheduleUpdate();
 		
-	
+		
     },
 	
 	update: function() {

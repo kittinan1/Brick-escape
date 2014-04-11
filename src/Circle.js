@@ -11,11 +11,14 @@ var Circle = cc.Sprite.extend({
     }, 	
  
     randomPosition: function() {
-		this.setPosition( new cc.Point( Math.random()*600 +100, Math.random()*500 +100 ) );
+		this.setPosition( new cc.Point( Math.random()*500 +200, Math.random()*300 +200 ) );
     },
 	
 	update: function( dt ) {
-	var pos = this.getPosition();
+		this.movement(dt);
+	},
+	movement: function( dt ){
+		var pos = this.getPosition();
 	if(!this.gameLayer.isOver){
 			if ( pos.y > screenHeight-this.radius ) {
 				a *=-1 ;

@@ -19,34 +19,38 @@ var Brick = cc.Sprite.extend({
     },
 	
     update: function( dt ) {	
-	var pos = this.getPosition();
+		this.movement(dt);	
+	},
+	
+	movement: function( dt ) {
+		var pos = this.getPosition();
 	if(!this.gameLayer.isOver){
 	if (this.isUp ){
-		if ( pos.y < screenHeight-35  ) {
+		if ( pos.y < screenHeight-135  ) {
         	this.setPosition( new cc.Point( pos.x, pos.y + 10 ) );
 		} else {
 			this.setPosition( new cc.Point( pos.x, pos.y ) );
 		}
 	}
 	if (this.isRight ){
-		if ( pos.x < screenWidth-35  ) {
+		if ( pos.x < screenWidth-135 ) {
 			this.setPosition( new cc.Point( pos.x + 10, pos.y ) );
 		} else {
 			this.setPosition( new cc.Point( pos.x,pos.y ) );
 		}
 	}
 	if ( this.isDown ){
-		if ( pos.y > 35 ) {
+		if ( pos.y > 140) {
         	this.setPosition( new cc.Point( pos.x, pos.y - 10 ) );
 		} else {
 			this.setPosition( new cc.Point( pos.x, pos.y ) );
 		}
 	}
 	if ( this.isLeft ){
-		if ( pos.x > 35 ) {
+		if ( pos.x > 140 ) {
         	this.setPosition( new cc.Point( pos.x - 10, pos.y ) );
 		} else {
-			this.setPosition( new cc.Point( pos.x, pos.y ) );
+			this.setPosition( new cc.Point(pos.x, pos.y ) );
 		}
 	}	
 	}
@@ -62,26 +66,28 @@ var Brick = cc.Sprite.extend({
 		this.isRight = true;
         //this.setRotation( 90 );
 	}
-	else if( direction == 4 ){
-		this.isDown = true;
-		//this.setRotation( 180 );
-    }
+	
 	else if( direction == 3 ){
 		this.isLeft = true;
 		//this.setRotation( 270 );
 	}
+	else if( direction == 4 ){
+		this.isDown = true;
+		//this.setRotation( 180 );
+    }
 
 	},
 	
 	switchDirectionRelease: function(direction) {
 		if ( direction == 1 )
 			this.isUp = false;
-		else if ( direction == 2)
+		else if ( direction == 2 )
 			this.isRight = false;
-		else if (direction == 4)
-			this.isDown = false;
-		else if (direction == 3)
+		else if ( direction == 3 )
 			this.isLeft = false;
+		else if ( direction == 4 )
+			this.isDown = false;
+		
 	}
 });
 
