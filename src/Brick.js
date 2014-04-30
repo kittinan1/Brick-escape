@@ -10,18 +10,6 @@ var Brick = cc.Sprite.extend({
 		this.gameLayer = gameLayer;
     },
 	
-	closeTo: function( obj ) {
-		var myPos = this.getPosition();
-		var oPos = obj.getPosition();
-		return ( ( Math.abs( myPos.x - oPos.x ) <= 50 ) &&
-		 ( Math.abs( myPos.y - oPos.y ) <= 50 ) );
-	
-    },
-	
-    update: function( dt ) {	
-		this.movement(dt);	
-	},
-	
 	movement: function( dt ) {
 		var pos = this.getPosition();
 	if(!this.gameLayer.isOver){
@@ -55,6 +43,10 @@ var Brick = cc.Sprite.extend({
 	}	
 	}
 	},
+	
+	update: function(dt) {
+		this.movement(dt);
+	 },
 	
 		
     switchDirection: function(direction) {
