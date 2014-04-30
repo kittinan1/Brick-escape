@@ -71,6 +71,10 @@ var GameLayer = cc.LayerColor.extend({
 		else if (e == cc.KEY.down)
 			this.brick.switchDirectionRelease(4);
 	
+	},
+	
+	randomNumber: function(lo,hi){
+		 return parseInt((Math.random()*(hi-lo+1))+lo);
 	}
 });
 

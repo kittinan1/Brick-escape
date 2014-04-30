@@ -2,28 +2,43 @@ var Circle = cc.Sprite.extend({
 	
     ctor: function( gameLayer ) {
         this._super();
-		//this.randomSize = Math.random()*2;
-		//if(this.randomSize == 1){
-        	this.initWithFile( 'Image/Circle.png' );
-		//}
-		//else if(this.randomSize == 2){
-			//this.initWithFile( 'Image/Circle2.png' );
-		//}
-		/*else if(this.randomSize == 3){
-			this.initWithFile( 'Image/Circle3.png' );
-		}*/
 		
-		this.radius=35;
 		this.gameLayer = gameLayer;
 		this.xAxisMove = Math.random()*5;
 		this.yAxisMove = Math.random()*5;
+		
+		this.randomSize = this.gameLayer.randomNumber(1,7);
+		if(this.randomSize == 1||this.randomSize == 2||this.randomSize == 3){
+        	this.initWithFile( 'Image/Circle.png' );
+			this.radius=35;
+		}
+		else if(this.randomSize == 4||this.randomSize ==5||this.randomSize == 6 ) {
+			this.initWithFile( 'Image/Circle2.png' );
+			this.radius=17;
+		}
+		else if(this.randomSize == 7){
+			this.initWithFile( 'Image/Circle3.png' );
+			this.radius=105;
+		}
+	
     }, 			
 	
 	closeTo: function( obj ) {
 		var myPos = this.getPosition();
 		var oPos = obj.getPosition();
-		return ( ( Math.abs( myPos.x - oPos.x ) <= 50 ) &&
-		 ( Math.abs( myPos.y - oPos.y ) <= 50 ) );
+		if(this.randomSize == 1||this.randomSize == 2||this.randomSize == 3){
+		return ( ( Math.abs( myPos.x - oPos.x ) <= 60 ) &&
+		 ( Math.abs( myPos.y - oPos.y ) <= 60 ) );
+		}
+			else if(this.randomSize == 4||this.randomSize ==5||this.randomSize == 6 ) {
+			return ( ( Math.abs( myPos.x - oPos.x ) <= 40 ) &&
+		 ( Math.abs( myPos.y - oPos.y ) <= 40 ) );
+		}
+		else if(this.randomSize == 7){
+				return ( ( Math.abs( myPos.x - oPos.x ) <= 110 ) &&
+		 ( Math.abs( myPos.y - oPos.y ) <= 110 ) );
+		}
+			
 	
     },
 	
@@ -38,7 +53,13 @@ var Circle = cc.Sprite.extend({
 	},
  
     randomPosition: function() {
-		this.setPosition( new cc.Point( Math.random()*500 +200, Math.random()*300 +200 ) );
+		var random = this.gameLayer.randomNumber(1,2);
+		if(random == 1){
+			this.setPosition( new cc.Point( Math.random()*150+100, Math.random()*300 +200 ) );
+		}
+		else if(random == 2){
+			this.setPosition( new cc.Point( Math.random()*150+500, Math.random()*300 +200 ) );
+		}
     },
 	movement: function( dt ){
 		var pos = this.getPosition();
