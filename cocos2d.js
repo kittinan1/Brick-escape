@@ -18,6 +18,7 @@
 			'src/Circle.js',
 			'src/Wallpaper.js'	,
 			'src/Gameover.js' ,
+			'src/Point.js',
 			
         ]
     };

@@ -12,6 +12,9 @@ var GameLayer = cc.LayerColor.extend({
 		
         this.brick = new Brick(this);
         this.brick.setPosition( new cc.Point( 400, 300 ) );
+		
+		this.point = new Point(this);
+		this.point.randomPosition();
 	
 		this.wallpaper = new Wallpaper();
 		this.wallpaper.setPosition(new cc.Point( 400, 300 ) );
@@ -24,6 +27,7 @@ var GameLayer = cc.LayerColor.extend({
 	
 		this.addChild( this.wallpaper );
 		this.addChild( this.brick  );
+		this.addChild( this.point );
 		this.addChild( this.circle);
 		
         this.brick.scheduleUpdate();
@@ -39,7 +43,7 @@ var GameLayer = cc.LayerColor.extend({
 		this.schedule(this.timeMinCounter,60);
 		this.schedule(this.scoresCounter,1);
 		
-		this.time = cc.LabelTTF.create(this.timeMin+" : " + this.timeSec,'Arial',50);
+		this.time = cc.LabelTTF.create(0+" : " + 00,'Arial',50);
 		this.time.setPosition( new cc.Point(100, 550));
 		this.time.setFontFillColor(new cc.Color3B(0, 51, 102));
 		this.addChild(this.time);
@@ -53,8 +57,18 @@ var GameLayer = cc.LayerColor.extend({
     },
 	
 	update: function(dt) {
+		if(this.timeSec<10){
+		this.time.setString(this.timeMin+" : 0" + this.timeSec);
+		}
+		else{
 		this.time.setString(this.timeMin+" : " + this.timeSec);
+		}
 		this.scoreLable.setString("Scores : "+ this.scores);
+		if( this.point.closeTo(this.brick )){
+			this.point.randomPosition();
+			this.scores +=100;
+			this.scoreLable.setString("Scores : "+ this.scores);
+		}
 		this.scheduleUpdate();
 		if(this.isOver ==true){
 			this.timeOver = cc.LabelTTF.create("Your scores is "+this.scores,'Arial',50);

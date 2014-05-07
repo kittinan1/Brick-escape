@@ -1,4 +1,3 @@
-//var limitBigCircle = 0;
 var Circle = cc.Sprite.extend({
     ctor: function( gameLayer ) {
         this._super();
@@ -18,7 +17,7 @@ var Circle = cc.Sprite.extend({
 		}
 		else if(this.randomSize == 7){
 			this.initWithFile( 'Image/Circle3.png' );
-			this.radius=105;
+			this.radius=90;
 		
 		}
 	
@@ -36,38 +35,15 @@ var Circle = cc.Sprite.extend({
 		 ( Math.abs( myPos.y - oPos.y ) <= 40 ) );
 		}
 		else if(this.randomSize == 7){
-				return ( ( Math.abs( myPos.x - oPos.x ) <= 110 ) &&
-		 ( Math.abs( myPos.y - oPos.y ) <= 110 ) );
+				return ( ( Math.abs( myPos.x - oPos.x ) <= 105 ) &&
+		 ( Math.abs( myPos.y - oPos.y ) <= 105 ) );
 		}
 			
 	
     },
-	/*circleHitCircle: function ( obj ){
-		var myPos = this.getPosition();
-		var oPos = obj.getPosition();
-		if( myPos != oPos){
-			if(this.closTo(this.gameLayer.circle)){
-				if(myPos.y > oPos.y){
-					this.yAxisMove *=-1;
-				}
-				if (myPos.y < oPos.y ) {
-					this.yAxisMove *=-1 ;
-				}
-				if ( myPos.x < oPos.x ) {
-					this.xAxisMove *=-1 ;
-				}
-				if ( myPos.x > oPos.x ) {
-					this.xAxisMove *=-1 ;
-				}
-				
-			}
-		}
-		
-	},*/
 	
     update: function( dt ) {	
 		this.movement(dt);
-		//this.circleHitCircle(this);
 		if ( this.closeTo(this.gameLayer.brick) && this.gameLayer.isOver == false ) {
 			this.gameLayer.addChild( this.gameLayer.gameover );
 			this.gameLayer.isOver = true;
@@ -77,12 +53,26 @@ var Circle = cc.Sprite.extend({
 	},
  
     randomPosition: function() {
-		var random = this.gameLayer.randomNumber(1,2);
+		var random = this.gameLayer.randomNumber(1,4);
 		if(random == 1){
-			this.setPosition( new cc.Point( Math.random()*150+100, Math.random()*300 +200 ) );
+			this.randomX = this.gameLayer.randomNumber(100,135);
+			this.randomY = this.gameLayer.randomNumber(100,500);
+			this.setPosition( new cc.Point( this.randomX,this.randomY ) );
 		}
 		else if(random == 2){
-			this.setPosition( new cc.Point( Math.random()*150+500, Math.random()*300 +200 ) );
+			this.randomX = this.gameLayer.randomNumber(665,700);
+			this.randomY = this.gameLayer.randomNumber(100,500);
+			this.setPosition( new cc.Point( this.randomX,this.randomY ) );
+		}
+		else if(random == 3){
+			this.randomX = this.gameLayer.randomNumber(135,665);
+			this.randomY = this.gameLayer.randomNumber(100,135);
+			this.setPosition( new cc.Point( this.randomX,this.randomY ) );
+		}
+		else if(random == 4){
+			this.randomX = this.gameLayer.randomNumber(135,665);
+			this.randomY = this.gameLayer.randomNumber(465,500);
+			this.setPosition( new cc.Point( this.randomX,this.randomY ) );
 		}
     },
 	movement: function( dt ){
