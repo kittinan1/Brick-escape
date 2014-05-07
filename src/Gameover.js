@@ -3,5 +3,6 @@ var Gameover = cc.Sprite.extend({
         this._super();
         this.initWithFile( 'Image/GameOver.png' );
 	}});
+	
  
     

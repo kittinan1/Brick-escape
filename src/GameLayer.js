@@ -32,14 +32,14 @@ var GameLayer = cc.LayerColor.extend({
 		
 		this.createCircle();
 		
-		this.schedule(this.createCircle,20,Infinity,10);
+		this.schedule(this.createCircle,10,Infinity,10);
 		
-		this.schedule(this.timeSecCounter,1,Infinity,0);
-		this.schedule(this.timeMinCounter,60,Infinity,0);
+		this.schedule(this.timeSecCounter,1);
+		this.schedule(this.timeMinCounter,60);
 		
 		this.time = cc.LabelTTF.create(this.timeMin+" : " + this.timeSec,'Arial',50);
 		this.time.setPosition( new cc.Point(390, 550));
-		this.time.setFontFillColor(new cc.Color3B(0, 0, 0));
+		this.time.setFontFillColor(new cc.Color3B(0, 51, 102));
 		this.addChild(this.time);
 		
 		
@@ -50,7 +50,12 @@ var GameLayer = cc.LayerColor.extend({
 		this.time.setString(this.timeMin+" : " + this.timeSec);
 		this.scheduleUpdate();
 		if(this.isOver ==true){
-			this.unscheduleAllCallbacks();
+			this.timeOver = cc.LabelTTF.create("Your scores is "+this.timeMin+" : " + this.timeSec,'Arial',50);
+			this.timeOver.setPosition( new cc.Point(400, 150));
+			this.timeOver.setFontFillColor(new cc.Color3B(0, 0, 0));
+			this.addChild(this.timeOver);
+			
+				this.unscheduleAllCallbacks();
 		}
 	 },
 	
