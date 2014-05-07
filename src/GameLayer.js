@@ -15,6 +15,9 @@ var GameLayer = cc.LayerColor.extend({
 		
 		this.point = new Point(this);
 		this.point.randomPosition();
+		
+		this.star = new Star(this);
+		this.star.randomPosition();
 	
 		this.wallpaper = new Wallpaper();
 		this.wallpaper.setPosition(new cc.Point( 400, 300 ) );
@@ -29,7 +32,7 @@ var GameLayer = cc.LayerColor.extend({
 		this.addChild( this.brick  );
 		this.addChild( this.point );
 		this.addChild( this.circle);
-		
+
         this.brick.scheduleUpdate();
 		this.circle.scheduleUpdate();
 		
@@ -42,6 +45,8 @@ var GameLayer = cc.LayerColor.extend({
 		this.schedule(this.timeSecCounter,1);
 		this.schedule(this.timeMinCounter,60);
 		this.schedule(this.scoresCounter,1);
+		
+		this.schedule(this.createStar,10,Infinity,1);
 		
 		this.time = cc.LabelTTF.create(0+" : " + 00,'Arial',50);
 		this.time.setPosition( new cc.Point(100, 550));
@@ -69,6 +74,7 @@ var GameLayer = cc.LayerColor.extend({
 			this.scores +=100;
 			this.scoreLable.setString("Scores : "+ this.scores);
 		}
+			
 		this.scheduleUpdate();
 		if(this.isOver ==true){
 			this.timeOver = cc.LabelTTF.create("Your scores is "+this.scores,'Arial',50);
@@ -105,6 +111,16 @@ var GameLayer = cc.LayerColor.extend({
 			
 		}
 		
+	},
+	createStar: function(){
+		this.starArr = new Array();
+		for(var i =1 ; i>0; i--){
+			this.starArr[i] = new Star(this);
+			this.starArr[i].randomPosition();
+			this.addChild( this.starArr[i] );
+			this.starArr[i].scheduleUpdate();
+			
+		}
 	},
 	
        onKeyDown: function( e ) {

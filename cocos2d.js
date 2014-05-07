@@ -19,6 +19,7 @@
 			'src/Wallpaper.js'	,
 			'src/Gameover.js' ,
 			'src/Point.js',
+			'src/Star.js',
 			
         ]
     };

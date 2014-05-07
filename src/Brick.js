@@ -52,20 +52,16 @@ var Brick = cc.Sprite.extend({
     switchDirection: function(direction) {
 	if ( direction == 1 ) {
 		this.isUp = true;
-        //this.setRotation( 0 );
 	}
 	else if( direction == 2 ){
 		this.isRight = true;
-        //this.setRotation( 90 );
 	}
 	
 	else if( direction == 3 ){
 		this.isLeft = true;
-		//this.setRotation( 270 );
 	}
 	else if( direction == 4 ){
 		this.isDown = true;
-		//this.setRotation( 180 );
     }
 
 	},
