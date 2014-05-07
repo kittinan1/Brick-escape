@@ -1,5 +1,5 @@
+//var limitBigCircle = 0;
 var Circle = cc.Sprite.extend({
-	
     ctor: function( gameLayer ) {
         this._super();
 		
@@ -16,10 +16,15 @@ var Circle = cc.Sprite.extend({
 			this.initWithFile( 'Image/Circle2.png' );
 			this.radius=17;
 		}
-		else if(this.randomSize == 7){
+		else if(this.randomSize == 7 /*&& limitBigCircle == 0*/){
 			this.initWithFile( 'Image/Circle3.png' );
 			this.radius=105;
+			//limitBigCircle += 1;
 		}
+		/*else if(this.randomSize == 7 && limitBigCircle !=0){
+			this.initWithFile( 'Image/Circle2.png' );
+			this.radius=17;
+		}*/
 	
     }, 			
 	
@@ -41,14 +46,37 @@ var Circle = cc.Sprite.extend({
 			
 	
     },
+	/*circleHitCircle: function ( obj ){
+		var myPos = this.getPosition();
+		var oPos = obj.getPosition();
+		if( myPos != oPos){
+			if(this.closTo(this.gameLayer.circle)){
+				if(myPos.y > oPos.y){
+					this.yAxisMove *=-1;
+				}
+				if (myPos.y < oPos.y ) {
+					this.yAxisMove *=-1 ;
+				}
+				if ( myPos.x < oPos.x ) {
+					this.xAxisMove *=-1 ;
+				}
+				if ( myPos.x > oPos.x ) {
+					this.xAxisMove *=-1 ;
+				}
+				
+			}
+		}
+		
+	},*/
 	
     update: function( dt ) {	
-		this.movement(dt); 
+		this.movement(dt);
+		//this.circleHitCircle(this);
 		if ( this.closeTo(this.gameLayer.brick) && this.gameLayer.isOver == false ) {
 			this.gameLayer.addChild( this.gameLayer.gameover );
 			this.gameLayer.isOver = true;
 			this.scheduleUpdate();
-		
+	
 		}
 	},
  
@@ -63,8 +91,9 @@ var Circle = cc.Sprite.extend({
     },
 	movement: function( dt ){
 		var pos = this.getPosition();
+		
 	if(!this.gameLayer.isOver){
-			if ( pos.y > screenHeight-this.radius ) {
+			if ( pos.y > screenHeight-this.radius) {
 				this.yAxisMove *=-1 ;
 			}
 			if ( pos.y < this.radius ) {
@@ -79,7 +108,7 @@ var Circle = cc.Sprite.extend({
 		
        	this.setPosition( new cc.Point( pos.x+this.xAxisMove, pos.y + this.yAxisMove ) );
 	}
-		
+	
 		
     }
 });	

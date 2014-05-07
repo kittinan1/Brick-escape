@@ -30,15 +30,19 @@ var GameLayer = cc.LayerColor.extend({
 		this.createCircle();
 		this.scheduleUpdate();
 		
+		this.schedule(this.createCircle,5,Infinity,5);
     },
 	
 	update: function(dt) {
 		this.scheduleUpdate();
+		if(this.isOver ==true){
+			this.unscheduleAllCallbacks();
+		}
 	 },
 	
 	createCircle: function() {
 		this.circleArr = new Array();
-		for(var i =5 ; i>0; i--){
+		for(var i =1 ; i>0; i--){
 			this.circleArr[i] = new Circle(this);
 			this.circleArr[i].randomPosition();
 			this.addChild( this.circleArr[i] );
