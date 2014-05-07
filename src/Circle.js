@@ -16,15 +16,11 @@ var Circle = cc.Sprite.extend({
 			this.initWithFile( 'Image/Circle2.png' );
 			this.radius=17;
 		}
-		else if(this.randomSize == 7 /*&& limitBigCircle == 0*/){
+		else if(this.randomSize == 7){
 			this.initWithFile( 'Image/Circle3.png' );
 			this.radius=105;
-			//limitBigCircle += 1;
+		
 		}
-		/*else if(this.randomSize == 7 && limitBigCircle !=0){
-			this.initWithFile( 'Image/Circle2.png' );
-			this.radius=17;
-		}*/
 	
     }, 			
 	
