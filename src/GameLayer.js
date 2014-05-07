@@ -3,8 +3,11 @@ var GameLayer = cc.LayerColor.extend({
     init: function() {
         this._super( new cc.Color4B( 127, 127, 127, 255 ) );
         this.setPosition( new cc.Point( 0, 0 ) );
-		
+	
 		this.isOver = false;
+		this.timeSec = 0;
+		this.timeMin = 0;
+		
 		
         this.brick = new Brick(this);
         this.brick.setPosition( new cc.Point( 400, 300 ) );
@@ -21,24 +24,47 @@ var GameLayer = cc.LayerColor.extend({
 		this.addChild( this.wallpaper );
 		this.addChild( this.brick  );
 		this.addChild( this.circle);
-			
+		
         this.brick.scheduleUpdate();
 		this.circle.scheduleUpdate();
 		
         this.setKeyboardEnabled( true );
 		
 		this.createCircle();
-		this.scheduleUpdate();
 		
-		this.schedule(this.createCircle,5,Infinity,5);
+		this.schedule(this.createCircle,20,Infinity,10);
+		
+		this.schedule(this.timeSecCounter,1,Infinity,0);
+		this.schedule(this.timeMinCounter,60,Infinity,0);
+		
+		this.time = cc.LabelTTF.create(this.timeMin+" : " + this.timeSec,'Arial',50);
+		this.time.setPosition( new cc.Point(390, 550));
+		this.time.setFontFillColor(new cc.Color3B(0, 0, 0));
+		this.addChild(this.time);
+		
+		
+		this.scheduleUpdate();
     },
 	
 	update: function(dt) {
+		this.time.setString(this.timeMin+" : " + this.timeSec);
 		this.scheduleUpdate();
 		if(this.isOver ==true){
 			this.unscheduleAllCallbacks();
 		}
 	 },
+	
+	timeSecCounter: function() {
+		if(this.timeSec!=59){
+			this.timeSec++;
+		}
+		else if(this.timeSec==59){
+			this.timeSec =0;
+		}
+	},
+	timeMinCounter: function(){
+		this.timeMin++;
+	},
 	
 	createCircle: function() {
 		this.circleArr = new Array();
