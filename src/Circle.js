@@ -49,9 +49,6 @@ var Circle = cc.Sprite.extend({
 			this.gameLayer.isOver = true;
 			this.scheduleUpdate();
 		}
-		if (this.closeTo(this.gameLayer.star)){
-			this.removeFromParent(true);
-		}
 	},
  
     randomPosition: function() {

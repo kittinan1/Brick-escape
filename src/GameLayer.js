@@ -8,7 +8,7 @@ var GameLayer = cc.LayerColor.extend({
 		this.timeSec = 0;
 		this.timeMin = 0;
 		this.scores = 0;
-		
+	
 		
         this.brick = new Brick(this);
         this.brick.setPosition( new cc.Point( 400, 300 ) );
@@ -18,7 +18,7 @@ var GameLayer = cc.LayerColor.extend({
 		
 		this.star = new Star(this);
 		this.star.randomPosition();
-	
+		
 		this.wallpaper = new Wallpaper();
 		this.wallpaper.setPosition(new cc.Point( 400, 300 ) );
 		
@@ -46,7 +46,7 @@ var GameLayer = cc.LayerColor.extend({
 		this.schedule(this.timeMinCounter,60);
 		this.schedule(this.scoresCounter,1);
 		
-		this.schedule(this.createStar,10,Infinity,1);
+		this.schedule(this.createStar,15,Infinity,10);
 		
 		this.time = cc.LabelTTF.create(0+" : " + 00,'Arial',50);
 		this.time.setPosition( new cc.Point(100, 550));
@@ -57,7 +57,6 @@ var GameLayer = cc.LayerColor.extend({
 		this.scoreLable.setPosition( new cc.Point(600,550));
 		this.scoreLable.setFontFillColor(new cc.Color3B(0,51,102));
 		this.addChild(this.scoreLable);
-		
 		this.scheduleUpdate();
     },
 	
@@ -102,25 +101,17 @@ var GameLayer = cc.LayerColor.extend({
 	},
 	
 	createCircle: function() {
-		this.circleArr = new Array();
-		for(var i =1 ; i>0; i--){
-			this.circleArr[i] = new Circle(this);
-			this.circleArr[i].randomPosition();
-			this.addChild( this.circleArr[i] );
-			this.circleArr[i].scheduleUpdate();
-			
-		}
-		
+		this.circle = new Circle(this);
+		this.circle.randomPosition();
+		this.addChild(this.circle);
+		this.circle.scheduleUpdate();
+
 	},
 	createStar: function(){
-		this.starArr = new Array();
-		for(var i =1 ; i>0; i--){
-			this.starArr[i] = new Star(this);
-			this.starArr[i].randomPosition();
-			this.addChild( this.starArr[i] );
-			this.starArr[i].scheduleUpdate();
-			
-		}
+		this.star = new Star(this);
+		this.star.randomPosition();
+		this.addChild(this.star);
+		this.star.scheduleUpdate();
 	},
 	
        onKeyDown: function( e ) {
